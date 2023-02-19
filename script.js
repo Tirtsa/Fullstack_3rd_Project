@@ -8,11 +8,6 @@ const movieSelect = document.getElementById('movie');
 let selectedMovie = '';
 let moviesArray = [];
 
-//define user Object with an array of movies Object
-let user = {
-    name: 'John Doe',
-    movies: []
-}
 
 //define user class with name and movies array
 class User {
@@ -21,6 +16,8 @@ class User {
         this.movies = movies;
     }
 }
+
+let user = new User('John Doe', []);
 
 //define movie class with title, price, selectedSeats and total
 class Movie {
@@ -128,11 +125,237 @@ function add_to_basket() {
     // let myMovie = new Movie(selectedMovieTitle, selectedMoviePrice, selectedSeatsIndexes, totalPrice);
     //create a new user object
     console.log(selectedMovie);
-    let newUser = new User(user.name, user.movies);
-    newUser.movies.push(selectedMovie);
+    
+    user.movies.push(selectedMovie);
 
     //save the user object in local storage
-    localStorage.setItem('user', JSON.stringify(newUser));
+    localStorage.setItem('user', JSON.stringify(user));
+
+    const row = document.createElement("tr");
+
+  const movieNameCell = document.createElement("td");
+  movieNameCell.innerText = selectedMovie.title;
+
+  const ticketPriceCell = document.createElement("td");
+  ticketPriceCell.innerText = selectedMovie.price;
+
+  const ticketQuantityCell = document.createElement("td");
+  ticketQuantityCell.innerText = selectedMovie.selectedSeats.length;
+
+  const totalPriceCell = document.createElement("td");
+  totalPriceCell.innerText = selectedMovie.total;
+
+  //add button edit and delete
+  const editButton = document.createElement("button");
+  editButton.innerText = "Edit";
+  editButton.className = "edit-button";
+  editButton.addEventListener("click", function() {
+    const selectedRows = document.querySelectorAll(".selected");
+    selectedRows.forEach(function(row) {
+      row.remove();
+    });
+  });
+
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.className = "delete-button";
+  // deleteButton.addEventListener("click", function() {
+  //   const selectedRows = document.querySelectorAll(".selected");
+  //   selectedRows.forEach(function(row) {
+  //     row.remove();
+  //   });
+  // });
+
+  row.appendChild(movieNameCell);
+  row.appendChild(ticketPriceCell);
+  row.appendChild(ticketQuantityCell);
+  row.appendChild(totalPriceCell);
+  row.appendChild(editButton);
+  row.appendChild(deleteButton);
+
+  basketItemsContainer.appendChild(row);
+
+    // add the selected movie to the user basket
+    // addMovieToBasket(selectedMovie);
     
 
 }
+
+// Basket items array
+let basketItems = [];
+
+// Get references to the DOM elements
+const basketTable = document.getElementById("basket-table");
+const basketItemsContainer = document.getElementById("basket-items");
+const searchInput = document.getElementById("search-input");
+const searchButton = document.getElementById("search-button");
+const addForm = document.getElementById("add-form");
+const movieNameInput = document.getElementById("movie-name");
+const ticketQuantityInput = document.getElementById("ticket-quantity");
+const addButton = document.getElementById("add-button");
+const cancelButton = document.getElementById("cancel-button");
+const showAddFormButton = document.getElementById("show-add-form-button");
+const deleteAllButton = document.getElementById("delete-all-button");
+const deleteButton = document.getElementById("delete-button");
+const editButton = document.getElementById("edit-button");
+
+// Show the add form
+showAddFormButton.addEventListener("click", function() {
+  addForm.style.display = "block";
+  basketTable.style.display = "none";
+});
+
+// Cancel the add form
+cancelButton.addEventListener("click", function() {
+  addForm.style.display = "none";
+  basketTable.style.display = "table";
+  movieNameInput.value = "";
+  ticketQuantityInput.value = "";
+});
+
+//delete an item from the basket
+deleteButton.addEventListener("click", function() {
+  
+  const selectedRows = document.querySelectorAll(".selected");
+  selectedRows.forEach(function(row) {
+    row.remove();
+  });
+});
+
+// add function that receives a movie object and add it to the basket table
+function addMovieToBasket(movie) {
+  const row = document.createElement("tr");
+
+  const movieNameCell = document.createElement("td");
+  movieNameCell.innerText = movie.title;
+
+  const ticketPriceCell = document.createElement("td");
+  ticketPriceCell.innerText = movie.price;
+
+  const ticketQuantityCell = document.createElement("td");
+  ticketQuantityCell.innerText = movie.selectedSeats.length;
+
+  const totalPriceCell = document.createElement("td");
+  totalPriceCell.innerText = movie.total;
+
+  //add button edit and delete
+  const editButton = document.createElement("button");
+  editButton.innerText = "Edit";
+  editButton.className = "edit-button";
+  editButton.addEventListener("click", function() {
+    const selectedRows = document.querySelectorAll(".selected");
+    selectedRows.forEach(function(row) {
+      row.remove();
+    });
+  });
+
+  const deleteButton = document.createElement("button");
+  deleteButton.innerText = "Delete";
+  deleteButton.className = "delete-button";
+  // deleteButton.addEventListener("click", function() {
+  //   const selectedRows = document.querySelectorAll(".selected");
+  //   selectedRows.forEach(function(row) {
+  //     row.remove();
+  //   });
+  // });
+
+  row.appendChild(movieNameCell);
+  row.appendChild(ticketPriceCell);
+  row.appendChild(ticketQuantityCell);
+  row.appendChild(totalPriceCell);
+  row.appendChild(editButton);
+  row.appendChild(deleteButton);
+
+  basketItemsContainer.appendChild(row);
+}
+
+// Add a new item to the basket
+addButton.addEventListener("click", function() {
+  const movieName = movieNameInput.value;
+  const ticketQuantity = ticketQuantityInput.value;
+  basketItems.push({ movieName, ticketQuantity });
+  renderBasketItems();
+  addForm.style.display = "none";
+  basketTable.style.display = "table";
+  movieNameInput.value = "";
+  ticketQuantityInput.value = "";
+});
+
+// Delete all items from the basket
+deleteAllButton.addEventListener("click", function() {
+  basketItems = [];
+  renderBasketItems();
+});
+
+// Render the basket items
+function renderBasketItems() {
+  basketItemsContainer.innerHTML = "";
+  for (let i = 0; i < basketItems.length; i++) {
+    const basketItem = basketItems[i];
+    const row = document.createElement("tr");
+    const movieNameCell = document.createElement("td");
+    movieNameCell.innerText = basketItem.movieName;
+    const ticketQuantityCell = document.createElement("td");
+    ticketQuantityCell.innerText = basketItem.ticketQuantity;
+    const actionsCell = document.createElement("td");
+    const changeButton = document.createElement("button");
+    changeButton.innerText = "Change";
+    changeButton.addEventListener("click", function() {
+      movieNameInput.value = basketItem.movieName;
+      ticketQuantityInput.value = basketItem.ticketQuantity;
+      addForm.style.display = "block";
+      basketTable.style.display = "none";
+      basketItems.splice(i, 1);
+    });
+    const deleteButton = document.createElement("button");
+    deleteButton.innerText = "Delete";
+    deleteButton.addEventListener("click", function() {
+      basketItems.splice(i, 1);
+      renderBasketItems();
+    });
+    actionsCell.appendChild(changeButton);
+    actionsCell.appendChild(deleteButton);
+    row.appendChild(movieNameCell);
+    row.appendChild(ticketQuantityCell);
+    row.appendChild(actionsCell);
+    basketItemsContainer.appendChild(row);
+  }
+}
+
+// Search for an item in the basket
+searchButton.addEventListener("click", function() {
+  const searchTerm = searchInput.value.toLowerCase();
+  basketItemsContainer.innerHTML = "";
+  for (let i = 0; i < basketItems.length; i++) {
+    const basketItem = basketItems[i];
+    if (basketItem.movieName.toLowerCase().indexOf(searchTerm) !== -1) {
+      const row = document.createElement("tr");
+      const movieNameCell = document.createElement("td");
+      movieNameCell.innerText = basketItem.movieName;
+      const ticketQuantityCell = document.createElement("td");
+      ticketQuantityCell.innerText = basketItem.ticketQuantity;
+      const actionsCell = document.createElement("td");
+      const changeButton = document.createElement("button");
+      changeButton.innerText = "Change";
+      changeButton.addEventListener("click", function() {
+        movieNameInput.value = basketItem.movieName;
+        ticketQuantityInput.value = basketItem.ticketQuantity;
+        addForm.style.display = "block";
+        basketTable.style.display = "none";
+        basketItems.splice(i, 1);
+      });
+      const deleteButton = document.createElement("button");
+      deleteButton.innerText = "Delete";
+      deleteButton.addEventListener("click", function() {
+        basketItems.splice(i, 1);
+        renderBasketItems();
+      });
+      actionsCell.appendChild(changeButton);
+      actionsCell.appendChild(deleteButton);
+      row.appendChild(movieNameCell);
+      row.appendChild(ticketQuantityCell);
+      row.appendChild(actionsCell);
+      basketItemsContainer.appendChild(row);
+    }
+  }
+});
