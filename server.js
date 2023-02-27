@@ -4,8 +4,8 @@ class Server{
             var obj = JSON.parse(body);
             if(obj.type == 'User'){
                 add_user(obj);
-                //obj.status
-                //obj.readyState
+                obj.status = 200;
+                obj.ReadyState = ReadyState.DONE;
                 return obj;
             }
             else if(obj.type == 'Movie'){
