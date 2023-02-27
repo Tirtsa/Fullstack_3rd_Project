@@ -125,6 +125,13 @@ function add_to_basket() {
     // let myMovie = new Movie(selectedMovieTitle, selectedMoviePrice, selectedSeatsIndexes, totalPrice);
     //create a new user object
     console.log(selectedMovie);
+
+    //---------------------------------
+    var fxhttp = new FXMLHttpRequest();
+    fxhttp.open("POST", "http://localhost:3000/movies", true);
+    fxhttp.send(JSON.stringify(selectedMovie));
+    var rep = fxhttp.onload();
+    //---------------------------------
     
     user.movies.push(selectedMovie);
 
