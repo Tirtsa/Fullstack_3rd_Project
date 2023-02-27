@@ -25,5 +25,13 @@ class FXMLHttpRequest{
         //voir si il faut rajouter async
     }
 
+    send(body){ //body - se qu'on envoie au server
+        var fxhttp = null;
+        fxhttp = Network.send(body, this);
+        this.ReadyState = fxhttp.ReadyState;
+        this.status = fxhttp.status;
+        this.response = fxhttp.response;
+    }
+  
 
 }

@@ -1,3 +1,6 @@
+// methods: POST, GET, PUT, DELETE
+
+
 class Server{
     static carry_request(body, obj){
         if(obj.method == 'POST'){
