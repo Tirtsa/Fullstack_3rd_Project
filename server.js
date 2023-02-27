@@ -1,4 +1,4 @@
-// methods: POST, GET, PUT, DELETE
+// methods: POST-creating data, GET, PUT-updating data, DELETE
 
 
 class Server{
@@ -23,6 +23,28 @@ class Server{
             }
             else if(obj.type == 'Movie'){
                 return get_movie();
+            }
+        }
+        else if(obj.method == 'PUT'){
+            var obj = JSON.parse(body);
+            if(obj.type == 'User'){
+                update_user(obj);
+                return obj;
+            }
+            else if(obj.type == 'Movie'){
+                update_movie(obj);
+                return obj;
+            }
+        }
+        else if(obj.method == 'DELETE'){
+            var obj = JSON.parse(body);
+            if(obj.type == 'User'){
+                delete_user(obj);
+                return obj;
+            }
+            else if(obj.type == 'Movie'){
+                delete_movie(obj);
+                return obj;
             }
         }
 

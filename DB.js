@@ -8,8 +8,6 @@ class User {
     }
 }
 
-let user = new User('John Doe', []);
-
 //define movie class with title, price, selectedSeats and total
 class Movie {
     constructor(title, price, selectedSeats, total) {
@@ -26,6 +24,7 @@ function add_user(user_json){
     localStorage.setItem('user', JSON.stringify(new_user));
 }
 
+//doit etre add_movie et pas add_to_basket - A CHANGER
 function add_to_basket(movie_json, user_json) {
 
     var new_user = JSON.parse(user_json);
@@ -49,3 +48,5 @@ function delete_movie(movie_json, user_json) {
     //remove the movie from the user from local storage
     localStorage.setItem('user', JSON.stringify(new_user));
 }
+
+//faire fonction update user, update movie, delete user, get_user, get_movie

@@ -133,10 +133,10 @@ function add_to_basket() {
     var rep = fxhttp.onload();
     //---------------------------------
     
-    user.movies.push(selectedMovie);
+    //user.movies.push(selectedMovie);
 
     //save the user object in local storage
-    localStorage.setItem('user', JSON.stringify(user));
+    //localStorage.setItem('user', JSON.stringify(user));
 
     const row = document.createElement("tr");
 
