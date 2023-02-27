@@ -20,6 +20,12 @@ class Movie {
     }
 }
 
+
+function add_user(user_json){
+    var new_user = JSON.parse(user_json);
+    localStorage.setItem('user', JSON.stringify(new_user));
+}
+
 function add_to_basket(movie_json, user_json) {
 
     var new_user = JSON.parse(user_json);
@@ -29,5 +35,17 @@ function add_to_basket(movie_json, user_json) {
 
     //save the user object in local storage
     localStorage.setItem('user', JSON.stringify(new_user));
-    
+}
+
+function delete_movie(movie_json, user_json) {
+    var new_user = JSON.parse(user_json);
+    var new_movie = JSON.parse(movie_json);
+
+    var index = new_user.movies.indexOf(new_movie);
+    if (index > -1) {
+        new_user.movies.splice(index, 1);
+    }
+
+    //remove the movie from the user from local storage
+    localStorage.setItem('user', JSON.stringify(new_user));
 }
