@@ -17,12 +17,32 @@ class FXMLHttpRequest{
     method="";
     url="";
 
-    open(method, url){
+    open(method, url,async){
         this.method = method;
         this.url = url;
         this.readyState = ReadyState.OPENED;
 
-        //voir si il faut rajouter async
+        this.async= async;
+        if (this.async == true){
+            this.onload=(e) =>{
+                if (this.ReadyState == ReadyState.DONE && this.status == 200){
+                    return this.response;
+                }
+                else {
+                    console.log(this.status);
+                }
+            }
+        }
+        else {
+            this.onload=(e) =>{
+                if (this.status == 200){
+                    return this.response;
+                }
+                else {
+                    console.log(this.status);
+                }
+            }
+        }
     }
 
     send(body){ //body - se qu'on envoie au server
@@ -33,5 +53,4 @@ class FXMLHttpRequest{
         this.response = fxhttp.response;
     }
   
-
 }
