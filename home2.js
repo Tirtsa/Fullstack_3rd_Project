@@ -221,6 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 //alert("InCorrect Password, Try Again:(");
                 setFormMessage(loginForm, "error", "Incorrect password, please try again");
 
+                //ici jai finalement pas utilise les trials
 
                 // user.trials += 1;
                 // //new request - update current user
