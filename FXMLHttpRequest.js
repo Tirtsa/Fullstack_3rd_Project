@@ -47,10 +47,12 @@ class FXMLHttpRequest{
 
     send(body){ //body - se qu'on envoie au server
         var fxhttp = null;
-        fxhttp = Network.send(body, this);
+        var fxhttp = Network.send(body, this);
         this.ReadyState = fxhttp.ReadyState;
         this.status = fxhttp.status;
         this.response = fxhttp.response;
     }
+
+
   
 }

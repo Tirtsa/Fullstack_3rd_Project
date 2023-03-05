@@ -9,25 +9,25 @@ let selectedMovie = '';
 let moviesArray = [];
 
 
-//define user class with name and movies array
-class User {
-    constructor(name, movies) {
-        this.name = name;
-        this.movies = movies;
-    }
-}
+// //define user class with name and movies array
+// class User {
+//     constructor(name, movies) {
+//         this.name = name;
+//         this.movies = movies;
+//     }
+// }
 
-let user = new User('John Doe', []);
+// let user = new User('John Doe', []);
 
-//define movie class with title, price, selectedSeats and total
-class Movie {
-    constructor(title, price, selectedSeats, total) {
-        this.title = title;
-        this.price = price;
-        this.selectedSeats = selectedSeats;
-        this.total = total;
-    }
-}
+// //define movie class with title, price, selectedSeats and total
+// class Movie {
+//     constructor(title, price, selectedSeats, total) {
+//         this.title = title;
+//         this.price = price;
+//         this.selectedSeats = selectedSeats;
+//         this.total = total;
+//     }
+// }
 
 
 var add_to_basket_btn = document.getElementById('add_to_basket_btn');
@@ -130,7 +130,7 @@ function add_to_basket() {
     var fxhttp = new FXMLHttpRequest();
     fxhttp.open("POST", "http://localhost:3000/movies", true);
     fxhttp.send(JSON.stringify(selectedMovie));
-    var rep = fxhttp.onload();
+    //var rep = fxhttp.onload();
     //---------------------------------
     
     //user.movies.push(selectedMovie);
