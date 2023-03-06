@@ -1,3 +1,5 @@
+
+
 //let selectedMovie = '';
 const seats = document.querySelectorAll('.row .seat:not(.occupied');
 const count = document.getElementById('count');
@@ -87,6 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const bookingForm = document.querySelector("#booking");
     const seatsForm = document.querySelector("#seats");
     const basketForm = document.querySelector("#basket");
+    const seatsContainer = document.querySelector('.seats-container');
 
     // Movie select event
     movieSelect.addEventListener('change', (e) => {
@@ -94,9 +97,6 @@ document.addEventListener("DOMContentLoaded", () => {
     setMovieData(e.target.selectedIndex, e.target.value);
     updateSelectedCount();
     });
-
-    const seatsContainer = document.querySelector('.seats-container');
-    window.alert(seatsContainer);
 
     document.querySelector("#linkCreateAccount").addEventListener("click", e => {
         e.preventDefault();
@@ -132,6 +132,24 @@ document.addEventListener("DOMContentLoaded", () => {
         e.preventDefault();
         document.querySelector("#movie").classList.remove("select-hidden");
         document.querySelector("#movie").classList.add("select-visible");
+        
+        set_movies();
+
+        var fxhttp = new FXMLHttpRequest();
+        fxhttp.open("GET", "http://localhost:3000/get_movies", true);
+        fxhttp.send();
+        var movies_list = fxhttp.response;
+
+        for (let i=1; i<movies_list.length();i++) {
+
+            const newMovieOption = document.createElement('option');
+            const movieOptionText = document.createTextNode(i.title);
+            // set option text
+            newMovieOption.appendChild(movieOptionText);
+            // and option value
+            newMovieOption.setAttribute('value',i.movieId);
+            document.getElementById("movies").appendChild(newMovieOption);
+        }
     });
 
     createAccountForm.addEventListener("submit", e => {
@@ -200,7 +218,6 @@ document.addEventListener("DOMContentLoaded", () => {
         //let obj = arr.find(o => o.name === 'string 1');
         let user = users_list.find(o => o.name === uname);
         if (user == null) {
-            //alert("User not found, please sign up first");
             setFormMessage(loginForm, "error", "User not found, please sign up first");
         }
         else {
@@ -218,32 +235,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
             }
             else {
-                //alert("InCorrect Password, Try Again:(");
                 setFormMessage(loginForm, "error", "Incorrect password, please try again");
-
-                //ici jai finalement pas utilise les trials
-
-                // user.trials += 1;
-                // //new request - update current user
-                // var fxhttp = new FXMLHttpRequest();
-                // fxhttp.open("PUT", "http://localhost:3000/update_current_user", true);
-                // fxhttp.send(user);
-
-                // if (user.trials < 4) {
-                //     //alert("InCorrect Password, Try Again:(");
-                //     setFormMessage(loginForm, "error", "Incorrect password, please try again");
-                // }
-                // else{
-                //     //new request - delete current user
-                //     var fxhttp = new FXMLHttpRequest();
-                //     fxhttp.open("DELETE", "http://localhost:3000/delete_current_user", true);
-                //     fxhttp.send();
-
-                //     //alert("InCorrect Password, the user is block!!");
-                //     setFormMessage(loginForm, "error", "InCorrect Password ! The user is blocked because of too more trials !!");
-                //     location.replace("index.html");
-                // }
-                
 
             }
         }

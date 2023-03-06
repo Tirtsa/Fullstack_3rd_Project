@@ -45,7 +45,7 @@ class FXMLHttpRequest{
         }
     }
 
-    send(body){ //body - se qu'on envoie au server
+    send(body){ //body - ce qu'on envoie au server
         var fxhttp = null;
         var fxhttp = Network.send(body, this);
         this.ReadyState = fxhttp.ReadyState;

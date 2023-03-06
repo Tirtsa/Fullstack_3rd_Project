@@ -1,3 +1,4 @@
+//Set form's error messages functions
 function setFormMessage(formElement, type, message) {
     const messageElement = formElement.querySelector(".message");
 
@@ -16,6 +17,8 @@ function clearInputError(inputElement) {
     inputElement.parentElement.querySelector(".input-error-message").textContent = "";
 }
 
+
+//Document event listener
 document.addEventListener("DOMContentLoaded", () => {
     const loginForm = document.querySelector("#login");
     const createAccountForm = document.querySelector("#createAccount");
@@ -25,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const basketForm = document.querySelector("#basket")
 
     const seatsContainer = document.querySelector('.seats-container');
-    window.alert(seatsContainer);
 
     document.querySelector("#linkCreateAccount").addEventListener("click", e => {
         e.preventDefault();
@@ -53,8 +55,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.querySelector("#category").addEventListener("change", e => {
         e.preventDefault();
-        document.querySelector("#movie").classList.remove("select-hidden");
-        document.querySelector("#movie").classList.add("select-visible");
+        document.querySelector("#movies").classList.remove("select-hidden");
+        document.querySelector("#movies").classList.add("select-visible");
+        
+        set_movies();
+
+        var fxhttp = new FXMLHttpRequest();
+        fxhttp.open("GET", "http://localhost:3000/get_movies", true);
+        fxhttp.send();
+        var movies_list = fxhttp.response;
+
+        movies_list.forEach(m => function() {
+            const newMovieOption = document.createElement('option');
+            const movieOptionText = document.createTextNode(m.title);
+            // set option text
+            newMovieOption.appendChild(movieOptionText);
+            // and option value
+            newMovieOption.setAttribute('value',m.movieId);
+            document.getElementById("movies").appendChild(newMovieOption);
+        });
+        
+        for (let i=1; i<movies_list.length();i++) {
+            const newMovieOption = document.createElement('option');
+            const movieOptionText = document.createTextNode(movies_list[i].title);
+            // set option text
+            newMovieOption.appendChild(movieOptionText);
+            // and option value
+            newMovieOption.setAttribute('value',movies_list[i].movieId);
+            document.getElementById("movies").appendChild(newMovieOption);
+        }
     });
 
     createAccountForm.addEventListener("submit", e => {
@@ -73,14 +102,22 @@ document.addEventListener("DOMContentLoaded", () => {
         
         //Get all input values to do some verifications
         var uname = document.querySelector("#signupUsername").value;
-        var email = document.querySelector("#email");
-        var pwd = document.querySelector("#signupPwd");
+        var email = document.querySelector("#email").value;
+        var pwd = document.querySelector("#signupPwd").value;
         var currentdate = new Date(); 
         var time = currentdate.getDate() + "/" + (currentdate.getMonth()+1)  + "/" + currentdate.getFullYear() +" " 
             + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds();
 
+
+        //create a new user object
+        let new_user = new User(uname,email,pwd,time,0, []);
+
+        var fxhttp = new FXMLHttpRequest();
+        fxhttp.open("POST", "http://localhost:3000/add_user", true);
+        fxhttp.send(new_user);
+
         //check if a same user exists ans set errror or insert user to localstorage
-        if (localStorage.getItem(uname) == undefined) {
+        /*if (localStorage.getItem(uname) == undefined) {
             var user = {Password: pwd.value, Email: email.value, Trials: 0, LastConnexion: time, Scores: {Trivia: 0, Sudoku: 0}};
             localStorage.setItem(uname, JSON.stringify(user));
             localStorage.setItem('currentUser', JSON.stringify(uname));
@@ -91,7 +128,7 @@ document.addEventListener("DOMContentLoaded", () => {
         else {
             //alert("The user already exist!");
             setFormMessage(createAccountForm, "error", "The user already exist !");
-        }
+        }*/
 
     });
 
@@ -117,41 +154,38 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         //check if user exists
-        var user = localStorage.getItem(uname);
-        if (user != null) {
-            user = JSON.parse(user);
-            //check password for username
-            if (user['Password'] == pwd) {
-                localStorage.setItem('currentUser', JSON.stringify(uname));
-                user['Trials'] = 0;
-                user['LastConnexion'] = time;
-                localStorage.setItem(uname, JSON.stringify(user));
-                //alert("successfull go in!");
-                setFormMessage(loginForm, "success", "Successfully log in !");
-                
-                loginForm.classList.add("form-hidden");
-                bookingForm.classList.remove("form-hidden");
-            }
-            // if password wrong, increment num of trials
-            else {
-                user['Trials'] += 1;
-                localStorage.setItem(uname, JSON.stringify(user));
-                if (Number(user['Trials']) < 4) {
-                    //alert("InCorrect Password, Try Again:(");
-                    setFormMessage(loginForm, "error", "Incorrect password, please try again");
-                }
-                // user blocked (emoved) after 4 wrong trials
-                else {
-                    localStorage.removeItem(uname);
-                    //alert("InCorrect Password, the user is block!!");
-                    setFormMessage(loginForm, "error", "InCorrect Password ! The user is blocked because of too more trials !!");
-                    location.replace("index.html");
-                }
-            }
+        //check if user exists
+        // first request - get users list
+        var fxhttp = new FXMLHttpRequest();
+        fxhttp.open("GET", "http://localhost:3000/get_users", true);
+        fxhttp.send();
+        var users_list = fxhttp.response;
+        //var users_list = fxhttp.onload();
+
+        //check if the uname of the user is in the users_list
+        //let obj = arr.find(o => o.name === 'string 1');
+        let user = users_list.find(o => o.name === uname);
+        if (user == null) {
+            setFormMessage(loginForm, "error", "User not found, please sign up first");
         }
         else {
-            //alert("InCorrect UserName:(");
-            setFormMessage(loginForm, "error", "Incorrect username");
+            if(user.password == pwd){
+                //new request - update current user
+                var fxhttp = new FXMLHttpRequest();
+                fxhttp.open("PUT", "http://localhost:3000/update_current_user", true);
+                fxhttp.send(user);
+
+                //alert("successfull go in!");
+                setFormMessage(loginForm, "success", "Successfully log in !");
+
+                loginForm.classList.add("form-hidden");
+                bookingForm.classList.remove("form-hidden");
+
+            }
+            else {
+                setFormMessage(loginForm, "error", "Incorrect password, please try again");
+
+            }
         }
         
     });
