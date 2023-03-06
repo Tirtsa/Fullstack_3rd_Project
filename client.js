@@ -125,38 +125,63 @@ const app = {
     var clon = temp.content.cloneNode(true);
     container.appendChild(clon);
 
+    set_movies();
+
+    var fxhttp = new FXMLHttpRequest();
+    fxhttp.open("GET", "http://localhost:3000/get_movies", true);
+    fxhttp.send();
+    var movies_list = fxhttp.response;
+
     document.querySelector("#category").addEventListener("change", e => {
       e.preventDefault();
       document.querySelector("#movies").classList.remove("select-hidden");
       document.querySelector("#movies").classList.add("select-visible");
-      
-      set_movies();
-
-      var fxhttp = new FXMLHttpRequest();
-      fxhttp.open("GET", "http://localhost:3000/get_movies", true);
-      fxhttp.send();
-      var movies_list = fxhttp.response;
 
       movies_list.forEach(m => {
-          const newMovieOption = document.createElement('option');
-          const movieOptionText = document.createTextNode(m.title);
-          // set option text
-          newMovieOption.appendChild(movieOptionText);
-          // and option value
-          newMovieOption.setAttribute('value',m.movieId);
-          document.getElementById("movies").appendChild(newMovieOption);
+        const newMovieOption = document.createElement('option');
+        const movieOptionText = document.createTextNode(m.title);
+        // set option text
+        newMovieOption.appendChild(movieOptionText);
+        // and option value
+        newMovieOption.setAttribute('value',m.movieId);
+        document.getElementById("movies").appendChild(newMovieOption);
       });
 
-      for (let i=1; i<movies_list.length();i++) {
-          const newMovieOption = document.createElement('option');
-          const movieOptionText = document.createTextNode(movies_list[i].title);
-          // set option text
-          newMovieOption.appendChild(movieOptionText);
-          // and option value
-          newMovieOption.setAttribute('value',movies_list[i].movieId);
-          document.getElementById("movies").appendChild(newMovieOption);
-      }
     });
+
+
+    document.querySelector("#btnBooking").addEventListener("click", e => {
+      var selected_genre = document.querySelector("#category").value;
+      var selected_movie = document.querySelector("#movies").value;
+
+      var intmovie = parseInt(selected_movie);
+      let movie = movies_list.find(m => m.movieId == parseInt(selected_movie));
+
+      var fxhttp = new FXMLHttpRequest();
+        fxhttp.open("PUT", "http://localhost:3000/update_current_movie", true);
+        fxhttp.send(movie);
+
+        app.seats();
+    });
+
+  },
+  seats: function() {
+    var container = document.getElementById("container");
+    actual_child = document.querySelector("#booking");
+    container.removeChild(actual_child);
+
+    var temp = document.getElementsByTagName("template")[3];
+    var clon = temp.content.cloneNode(true);
+    container.appendChild(clon);
+
+    const seatsContainer = document.querySelector('.seats-container');
+    // Seat click event
+    seatsContainer.addEventListener('click', (e) => {
+      if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
+        e.target.classList.toggle('selected');
+        updateSelectedCount();
+      }});
+
   }
   
 }
@@ -182,4 +207,30 @@ function setInputError(inputElement, message) {
 function clearInputError(inputElement) {
   inputElement.classList.remove("input-error");
   inputElement.parentElement.querySelector(".input-error-message").textContent = "";
+}
+
+// update total and count
+function updateSelectedCount() {
+  const selectedSeats = document.querySelectorAll('.row .seat.selected');
+
+  // Copy selected seats index into arr
+  const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
+
+  //storing the seleted seats in local storage
+  localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+
+  //copy selected seats into arr
+  // map through array
+  //return new array of indexes
+
+  var fxhttp = new FXMLHttpRequest();
+    fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
+    fxhttp.send();
+    var current_movie = fxhttp.response; 
+  
+  ticketPrice = movie.price;
+  const selectedSeatsCount = selectedSeats.length;
+
+  count.innerText = selectedSeatsCount;
+  total.innerText = selectedSeatsCount * ticketPrice;
 }
