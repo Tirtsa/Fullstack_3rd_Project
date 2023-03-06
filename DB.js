@@ -138,121 +138,145 @@ var movies_json = [
     {
       "movieId": 2,
       "title": "Jumanji (1995)",
-      "genres": "Adventure|Children|Fantasy"
+      "genres": "Adventure|Children|Fantasy",
+      "price": 15
     },
     {
       "movieId": 3,
       "title": "Grumpier Old Men (1995)",
-      "genres": "Comedy|Romance"
+      "genres": "Comedy|Romance",
+      "price": 13
     },
     {
       "movieId": 4,
       "title": "Waiting to Exhale (1995)",
-      "genres": "Comedy|Drama|Romance"
+      "genres": "Comedy|Drama|Romance",
+      "price": 14
     },
     {
       "movieId": 5,
       "title": "Father of the Bride Part II (1995)",
-      "genres": "Comedy"
+      "genres": "Comedy",
+      "price": 9
     },
     {
       "movieId": 6,
       "title": "Heat (1995)",
-      "genres": "Action|Crime|Thriller"
+      "genres": "Action|Crime|Thriller",
+      "price": 10
     },
     {
       "movieId": 7,
       "title": "Sabrina (1995)",
-      "genres": "Comedy|Romance"
+      "genres": "Comedy|Romance",
+      "price": 10
     },
     {
       "movieId": 8,
       "title": "Tom and Huck (1995)",
-      "genres": "Adventure|Children"
+      "genres": "Adventure|Children",
+      "price": 11
     },
     {
       "movieId": 9,
       "title": "Sudden Death (1995)",
-      "genres": "Action"
+      "genres": "Action",
+      "price": 12
     },
     {
       "movieId": 10,
       "title": "GoldenEye (1995)",
-      "genres": "Action|Adventure|Thriller"
+      "genres": "Action|Adventure|Thriller",
+      "price": 10
     },
     {
       "movieId": 11,
       "title": "American President, The (1995)",
-      "genres": "Comedy|Drama|Romance"
+      "genres": "Comedy|Drama|Romance",
+      "price": 12
     },
     {
       "movieId": 12,
       "title": "Dracula: Dead and Loving It (1995)",
-      "genres": "Comedy|Horror"
+      "genres": "Comedy|Horror",
+      "price": 10
     },
     {
       "movieId": 13,
       "title": "Balto (1995)",
-      "genres": "Adventure|Animation|Children"
+      "genres": "Adventure|Animation|Children",
+      "price": 10
     },
     {
       "movieId": 14,
       "title": "Nixon (1995)",
-      "genres": "Drama"
+      "genres": "Drama",
+      "price": 12
     },
     {
       "movieId": 15,
       "title": "Cutthroat Island (1995)",
-      "genres": "Action|Adventure|Romance"
+      "genres": "Action|Adventure|Romance",
+      "price": 10
     },
     {
       "movieId": 16,
       "title": "Casino (1995)",
-      "genres": "Crime|Drama"
+      "genres": "Crime|Drama",
+      "price": 10
     },
     {
       "movieId": 17,
       "title": "Sense and Sensibility (1995)",
-      "genres": "Drama|Romance"
+      "genres": "Drama|Romance",
+      "price": 9
     },
     {
       "movieId": 18,
       "title": "Four Rooms (1995)",
-      "genres": "Comedy"
+      "genres": "Comedy",
+      "price": 14
     },
     {
       "movieId": 19,
       "title": "Ace Ventura: When Nature Calls (1995)",
-      "genres": "Comedy"
+      "genres": "Comedy",
+      "price": 13
     },
     {
       "movieId": 20,
       "title": "Money Train (1995)",
-      "genres": "Action|Comedy|Crime|Drama|Thriller"
+      "genres": "Action|Comedy|Crime|Drama|Thriller",
+      "price": 10
     },
     {
       "movieId": 21,
       "title": "Get Shorty (1995)",
-      "genres": "Comedy|Crime|Thriller"
+      "genres": "Comedy|Crime|Thriller",
+      "price": 15
     },
     {
       "movieId": 22,
       "title": "Copycat (1995)",
-      "genres": "Crime|Drama|Horror|Mystery|Thriller"
+      "genres": "Crime|Drama|Horror|Mystery|Thriller",
+      "price": 14
     },
     {
       "movieId": 23,
       "title": "Assassins (1995)",
-      "genres": "Action|Crime|Thriller"
+      "genres": "Action|Crime|Thriller",
+      "price": 12
     },
     {
       "movieId": 24,
       "title": "Powder (1995)",
-      "genres": "Drama|Sci-Fi"
+      "genres": "Drama|Sci-Fi",
+      "price": 10
     },
     {
       "movieId": 25,
       "title": "Leaving Las Vegas (1995)",
-      "genres": "Drama|Romance"
+      "genres": "Drama|Romance",
+      "price": 10
     }
 ]
