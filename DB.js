@@ -30,13 +30,20 @@ class Order {
     }
 }
 
+class SelectedSeat {
+    constructor(movie_id, selected_seats) {
+        this.movie_id = movie_id;
+        this.selected_seats = selected_seats;
+    }
+}
+
 //window.localStorage.clear();
 
 //2 arrays to store the users and movies
 var users = [];
 var movies = [];
 var orders = [];
-
+var allMoviesSelectedSeats = [];
 
 
 //function to get the users array from local storage
@@ -49,6 +56,11 @@ function get_users(){
 function get_movies(){
     var movies = JSON.parse(localStorage.getItem('movies'));
     return movies;
+}
+
+function get_selected_seats(){
+    var allMoviesSelectedSeats = JSON.parse(localStorage.getItem('allMoviesSelectedSeats'));
+    return allMoviesSelectedSeats;
 }
 
 function get_current_user(){
@@ -71,11 +83,38 @@ function delete_current_user(){
     localStorage.removeItem('CurrentUser');
 }
 
-
 function add_user(user){
     users.push(user);
     localStorage.setItem('user', JSON.stringify(user));
     localStorage.setItem('users', JSON.stringify(users));
+}
+
+function get_selected_seats_by_movie_id(movie_id){
+    var selectedSeats = get_selected_seats();
+    for (var i = 0; i < selectedSeats.length; i++) {
+        if (selectedSeats[i].movie_id == movie_id) {
+            return selectedSeats[i].selected_seats; 
+        }
+    }
+}
+
+function add_seats(movie_id, seats){
+  //pass through the selected seats array and check if the movie id is already there
+  //if it is, update the seats array
+  //if it is not, add a new object to the array
+  var selectedSeats = get_selected_seats();
+  var found = false;
+  for (var i = 0; i < selectedSeats.length; i++) {
+    if (selectedSeats[i].movie_id == movie_id) {
+      selectedSeats[i].selected_seats=seats;
+      found = true;
+    }
+  }
+  if (!found) {
+    var new_selected_seats = new SelectedSeat(movie_id, seats);
+    allMoviesSelectedSeats.push(new_selected_seats);
+    localStorage.setItem('allMoviesSelectedSeats', JSON.stringify(allMoviesSelectedSeats));
+  }
 }
 
 function add_to_basket() {
