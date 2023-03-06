@@ -154,7 +154,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         //check if user exists
-        //check if user exists
         // first request - get users list
         var fxhttp = new FXMLHttpRequest();
         fxhttp.open("GET", "http://localhost:3000/get_users", true);
