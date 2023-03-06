@@ -7,9 +7,9 @@
         <link rel="stylesheet" href="./home.css">
     </head>
     <body>
-        <div class="container">
-            <template class="active_page" id="login_t">
-                <form class="form" id="login">
+        <div class="container" id="container">
+            <template class="page active" id="login_t">
+                <div class="form" id="login">
                     <div class="title">
                         <img src="./popcorn-cinema-dim.png" alt="Logo">
                         <h1>Login</h1>
@@ -27,11 +27,12 @@
                     <p class="text">
                         <a class="link" href="./" id="linkCreateAccount">Don't have an account? Create account</a>
                     </p>
-                </form> 
+                </div>
+                 
             </template>
 
             <template class="page" id="createAccount_t">
-                <form class="form form-hidden" id="createAccount">
+                <div class="form" id="createAccount">
                     <div class="title">
                         <img src="./popcorn-cinema-dim.png" alt="Logo">
                         <h1>Sign up</h1>
@@ -57,7 +58,7 @@
                     <p class="text">
                         <a class="link" href="./" id="linkLogin">Already have an account? Sign in</a>
                     </p>
-                </form>
+                </div>
             </template>
 
             <template class="page" id="booking_t">
@@ -232,7 +233,7 @@
             
         </div>
 
-        <script src="./home.js"></script>
+        <script src="./client.js"></script>
         <script src="network.js"></script>
         <script src="DB.js"></script>
         <script src="server.js"></script>

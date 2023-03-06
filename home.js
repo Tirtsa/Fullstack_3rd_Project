@@ -20,6 +20,30 @@ function clearInputError(inputElement) {
 
 //Document event listener
 document.addEventListener("DOMContentLoaded", () => {
+
+    var temp = document.getElementsByTagName("template")[0];
+    var clon = temp.content.cloneNode(true);
+    document.getElementById("container").appendChild(clon);
+
+
+    document.querySelector("#linkCreateAccount").addEventListener("click", e => {
+        e.preventDefault();
+
+        var temp = document.getElementsByTagName("template")[1];
+        var clon = temp.content.cloneNode(true);
+        document.getElementById("container").appendChild(clon);
+        
+    });
+
+
+
+
+
+
+
+
+
+
     const loginForm = document.querySelector("#login");
     const createAccountForm = document.querySelector("#createAccount");
     const form_pwd = document.querySelector("#pwd");
@@ -29,11 +53,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const seatsContainer = document.querySelector('.seats-container');
 
-    document.querySelector("#linkCreateAccount").addEventListener("click", e => {
-        e.preventDefault();
-        loginForm.classList.add("form-hidden");
-        createAccountForm.classList.remove("form-hidden");
-    });
 
     document.querySelector("#linkLogin").addEventListener("click", e => {
         e.preventDefault();
@@ -74,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
             newMovieOption.setAttribute('value',m.movieId);
             document.getElementById("movies").appendChild(newMovieOption);
         });
-        
+
         for (let i=1; i<movies_list.length();i++) {
             const newMovieOption = document.createElement('option');
             const movieOptionText = document.createTextNode(movies_list[i].title);
