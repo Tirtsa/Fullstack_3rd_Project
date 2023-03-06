@@ -58,6 +58,11 @@ function get_movies(){
     return movies;
 }
 
+function get_orders(){
+    var orders = JSON.parse(localStorage.getItem('orders'));
+    return orders;
+}
+
 function get_selected_seats(){
     var allMoviesSelectedSeats = JSON.parse(localStorage.getItem('allMoviesSelectedSeats'));
     return allMoviesSelectedSeats;
@@ -69,6 +74,25 @@ function get_current_user(){
 
 function get_current_movie(){
     return localStorage.getItem('CurrentMovie');
+}
+
+//get order by user id
+function get_order_by_user_id(user_id){
+    var orders = get_orders();
+    for (var i = 0; i < orders.length; i++) {
+        if (orders[i].user_id == user_id) {
+            return orders[i];
+        }
+    }
+}
+
+function get_selected_seats_by_movie_id(movie_id){
+  var selectedSeats = get_selected_seats();
+  for (var i = 0; i < selectedSeats.length; i++) {
+      if (selectedSeats[i].movie_id == movie_id) {
+          return selectedSeats[i]; 
+      }
+  }
 }
 
 function update_current_user(user){
@@ -89,30 +113,20 @@ function add_user(user){
     localStorage.setItem('users', JSON.stringify(users));
 }
 
-function get_selected_seats_by_movie_id(movie_id){
-    var selectedSeats = get_selected_seats();
-    for (var i = 0; i < selectedSeats.length; i++) {
-        if (selectedSeats[i].movie_id == movie_id) {
-            return selectedSeats[i].selected_seats; 
-        }
-    }
-}
-
-function add_seats(movie_id, seats){
+function add_seats(selected_seats_obj){
   //pass through the selected seats array and check if the movie id is already there
   //if it is, update the seats array
   //if it is not, add a new object to the array
   var selectedSeats = get_selected_seats();
   var found = false;
   for (var i = 0; i < selectedSeats.length; i++) {
-    if (selectedSeats[i].movie_id == movie_id) {
-      selectedSeats[i].selected_seats=seats;
+    if (selectedSeats[i].movie_id == selected_seats_obj.movie_id) {
+      selectedSeats[i].selected_seats=selected_seats_obj.seats;
       found = true;
     }
   }
   if (!found) {
-    var new_selected_seats = new SelectedSeat(movie_id, seats);
-    allMoviesSelectedSeats.push(new_selected_seats);
+    allMoviesSelectedSeats.push(selected_seats_obj);
     localStorage.setItem('allMoviesSelectedSeats', JSON.stringify(allMoviesSelectedSeats));
   }
 }
@@ -125,6 +139,11 @@ function add_to_basket() {
 
     //save the user object in local storage
     localStorage.setItem('user', JSON.stringify(new_user));
+}
+
+function add_order(order){
+    orders.push(order);
+    localStorage.setItem('orders', JSON.stringify(orders));
 }
 
 function delete_movie(movie_json, user_json) {
@@ -148,7 +167,6 @@ function set_genres() {
     localStorage.setItem('genres', JSON.stringify(genres));
 }
 
-//faire fonction update user, update movie, delete user, get_user, get_movie
 var genres = ['Action',
     'Adventure',
     'Animation',
