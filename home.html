@@ -23,12 +23,11 @@
                         <input type="password" class="input" id="pwd" autofocus placeholder="Password">
                         <div class="input-error-message"></div>
                     </div>
-                    <button class="button" type="submit">Continue</button>
+                    <button class="button" type="submit" id="btnLogin">Continue</button>
                     <p class="text">
-                        <a class="link" href="./" id="linkCreateAccount">Don't have an account? Create account</a>
+                        <a class="link" id="linkCreateAccount">Don't have an account? Create account</a>
                     </p>
-                </div>
-                 
+                </div>    
             </template>
 
             <template class="page" id="createAccount_t">
@@ -54,15 +53,15 @@
                         <input type="password" class="input" id="confirmPwd" autofocus placeholder="Confirm password">
                         <div class="input-error-message"></div>
                     </div>
-                    <button class="button" type="submit">Continue</button>
+                    <button class="button" type="submit" id="btnCreateAccount">Continue</button>
                     <p class="text">
-                        <a class="link" href="./" id="linkLogin">Already have an account? Sign in</a>
+                        <a class="link" id="linkLogin">Already have an account? Sign in</a>
                     </p>
                 </div>
             </template>
 
             <template class="page" id="booking_t">
-                <form class="form-hidden"  id="booking">
+                <form class="form"  id="booking">
                     <div class="title">
                         <h1>Book your ticket for movie</h1>
                     </div>
@@ -98,7 +97,7 @@
             </template>
 
             <template class="page" id="seats_t">
-                <form class="form-hidden" id="seats">
+                <form class="form" id="seats">
                     <ul class="showcase">
                     <li>
                         <div class="seat"></div>
@@ -193,7 +192,7 @@
             </template>
             
             <template class="page" id="basket_t">
-                <form class="form-hidden" id="basket">
+                <form class="form" id="basket">
                     <h1>User Basket</h1>
                     
                     <!-- Basket table -->
