@@ -182,12 +182,10 @@ const app = {
         updateSelectedCount();
       }});
 
-  }
-  
+  } 
 }
 
 document.addEventListener('DOMContentLoaded', app.init);
-
 
 //All helper's functions
 //Set form's error messages functions
@@ -224,11 +222,11 @@ function updateSelectedCount() {
   //return new array of indexes
 
   var fxhttp = new FXMLHttpRequest();
-    fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
-    fxhttp.send();
-    var current_movie = fxhttp.response; 
+  fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
+  fxhttp.send();
+  var current_movie = fxhttp.response; 
   
-  ticketPrice = movie.price;
+  var ticketPrice = +current_movie.price.value;
   const selectedSeatsCount = selectedSeats.length;
 
   count.innerText = selectedSeatsCount;

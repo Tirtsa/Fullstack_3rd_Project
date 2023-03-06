@@ -12,12 +12,11 @@ class User {
 
 //define movie class with title, price, selectedSeats and total
 class Movie {
-    constructor(title, genres, price, selectedSeats, total) {
-        this.title = title;
-        this.genres = genres
-        this.price = price;
-        this.selectedSeats = selectedSeats;
-        this.total = total;
+    constructor(movieId, title, genres, price) {
+      this.movieId = movieId  
+      this.title = title;
+      this.genres = genres
+      this.price = price;
     }
 }
 
@@ -160,7 +159,10 @@ function delete_movie(movie_json, user_json) {
 }
 
 function set_movies() {
-    localStorage.setItem('movies', JSON.stringify(movies_json));
+  movies_json.forEach(element => {
+    movies.push(new Movie(element["movieId"], element["title"], element["genres"], element["price"]));
+  });
+    localStorage.setItem('movies', JSON.stringify(movies));
 }
 
 function set_genres() {
