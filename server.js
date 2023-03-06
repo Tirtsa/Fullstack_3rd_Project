@@ -36,11 +36,11 @@ class Server{
             obj.response = get_movies();
             return obj;
         }
-        else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_movie"){
+        else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_current_movie"){
             var movie = JSON.parse(body);
             obj.status = 200;
             obj.ReadyState = ReadyState.DONE;
-            obj.response = get_movie(movie);
+            obj.response = get_current_movie();
             return obj;
         }
         //PUT
