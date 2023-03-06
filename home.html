@@ -8,218 +8,228 @@
     </head>
     <body>
         <div class="container">
-            <form class="form" id="login">
-                <div class="title">
-                    <img src="./popcorn-cinema-dim.png" alt="Logo">
-                    <h1>Login</h1>
-                </div>
-                <div class="message form-error-message"></div>
-                <div class="input-group">
-                    <input type="text" class="input" id="username" autofocus placeholder="Username">
-                    <div class="input-error-message"></div>
-                </div>
-                <div class="input-group">
-                    <input type="password" class="input" id="pwd" autofocus placeholder="Password">
-                    <div class="input-error-message"></div>
-                </div>
-                <button class="button" type="submit">Continue</button>
-                <p class="text">
-                    <a class="link" href="./" id="linkCreateAccount">Don't have an account? Create account</a>
-                </p>
-            </form>
-            <form class="form form-hidden" id="createAccount">
-                <div class="title">
-                    <img src="./popcorn-cinema-dim.png" alt="Logo">
-                    <h1>Sign up</h1>
-                </div>
-                <div class="message form-error-message"></div>
-                <div class="input-group">
-                    <input type="text" class="input" id="signupUsername" autofocus placeholder="Username">
-                    <div class="input-error-message"></div>
-                </div>
-                <div class="input-group">
-                    <input type="text" class="input" id="email" autofocus placeholder="Email address">
-                    <div class="input-error-message"></div>
-                </div>
-                <div class="input-group">
-                    <input type="password" class="input" id="signupPwd" autofocus placeholder="Password">
-                    <div class="input-error-message"></div>
-                </div>
-                <div class="input-group">
-                    <input type="password" class="input" id="confirmPwd" autofocus placeholder="Confirm password">
-                    <div class="input-error-message"></div>
-                </div>
-                <button class="button" type="submit">Continue</button>
-                <p class="text">
-                    <a class="link" href="./" id="linkLogin">Already have an account? Sign in</a>
-                </p>
-            </form>
-        
+            <template class="active_page" id="login_t">
+                <form class="form" id="login">
+                    <div class="title">
+                        <img src="./popcorn-cinema-dim.png" alt="Logo">
+                        <h1>Login</h1>
+                    </div>
+                    <div class="message form-error-message"></div>
+                    <div class="input-group">
+                        <input type="text" class="input" id="username" autofocus placeholder="Username">
+                        <div class="input-error-message"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="input" id="pwd" autofocus placeholder="Password">
+                        <div class="input-error-message"></div>
+                    </div>
+                    <button class="button" type="submit">Continue</button>
+                    <p class="text">
+                        <a class="link" href="./" id="linkCreateAccount">Don't have an account? Create account</a>
+                    </p>
+                </form> 
+            </template>
 
-            <form class="form-hidden"  id="booking">
-                <div class="title">
-                    <h1>Book your ticket for movie</h1>
-                </div>
-                <div class="message form-error-message"></div>
-                <p>Please choose Category and Movie</p>
-                <div class="select-group">
-                    <select class="select"  id="category">
-                        <option value="Action">Action</option>
-                        <option value="Adventure">Adventure</option>
-                        <option value="Comedy">Comedy</option>
-                        <option value="Drama">Drama</option>
-                        <option value="Fantasy">Fantasy</option>
-                        <option value="Horror">Horror</option>
-                        <option value="Musicals">Musicals</option>
-                        <option value="Mystery">Mystery</option>
-                        <option value="Romance">Romance</option>
-                        <option value="Science fiction">Science fiction</option>
-                        <option value="Sports">Sports</option>
-                        <option value="Thriller">Thriller</option>
-                        <option value="Western">Western</option>
-                    </select>
-                    <div class="input-error-message"></div>
+            <template class="page" id="createAccount_t">
+                <form class="form form-hidden" id="createAccount">
+                    <div class="title">
+                        <img src="./popcorn-cinema-dim.png" alt="Logo">
+                        <h1>Sign up</h1>
+                    </div>
+                    <div class="message form-error-message"></div>
+                    <div class="input-group">
+                        <input type="text" class="input" id="signupUsername" autofocus placeholder="Username">
+                        <div class="input-error-message"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="text" class="input" id="email" autofocus placeholder="Email address">
+                        <div class="input-error-message"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="input" id="signupPwd" autofocus placeholder="Password">
+                        <div class="input-error-message"></div>
+                    </div>
+                    <div class="input-group">
+                        <input type="password" class="input" id="confirmPwd" autofocus placeholder="Confirm password">
+                        <div class="input-error-message"></div>
+                    </div>
+                    <button class="button" type="submit">Continue</button>
+                    <p class="text">
+                        <a class="link" href="./" id="linkLogin">Already have an account? Sign in</a>
+                    </p>
+                </form>
+            </template>
+
+            <template class="page" id="booking_t">
+                <form class="form-hidden"  id="booking">
+                    <div class="title">
+                        <h1>Book your ticket for movie</h1>
+                    </div>
+                    <div class="message form-error-message"></div>
+                    <p>Please choose Category and Movie</p>
+                    <div class="select-group">
+                        <select class="select"  id="category">
+                            <option value="Action">Action</option>
+                            <option value="Adventure">Adventure</option>
+                            <option value="Comedy">Comedy</option>
+                            <option value="Drama">Drama</option>
+                            <option value="Fantasy">Fantasy</option>
+                            <option value="Horror">Horror</option>
+                            <option value="Musicals">Musicals</option>
+                            <option value="Mystery">Mystery</option>
+                            <option value="Romance">Romance</option>
+                            <option value="Science fiction">Science fiction</option>
+                            <option value="Sports">Sports</option>
+                            <option value="Thriller">Thriller</option>
+                            <option value="Western">Western</option>
+                        </select>
+                        <div class="input-error-message"></div>
+                    
+                        <select class="select select-hidden" id="movies">
+                        </select>
+                        <div class="input-error-message"></div>
+                    </div>
+                    <button class="button" type="submit" id="btnBooking">Choose seats</button>
+                    <p class="text">
+                        <a class="link" href="./" id="linkCreateAccount">Don't have an account? Create account</a>
+                    </p>
+                </form>
+            </template>
+
+            <template class="page" id="seats_t">
+                <form class="form-hidden" id="seats">
+                    <ul class="showcase">
+                    <li>
+                        <div class="seat"></div>
+                        <small>N/A</small>
+                    </li>
                 
-                    <select class="select select-hidden" id="movies">
-                    </select>
-                    <div class="input-error-message"></div>
-                </div>
-                <button class="button" type="submit" id="btnBooking">Choose seats</button>
-                <p class="text">
-                    <a class="link" href="./" id="linkCreateAccount">Don't have an account? Create account</a>
-                </p>
-            </form>
-
-            <form class="form-hidden" id="seats">
-                <ul class="showcase">
-                <li>
-                    <div class="seat"></div>
-                    <small>N/A</small>
-                </li>
-            
-                <li>
-                    <div class="seat selected"></div>
-                    <small>Selected</small>
-                </li>
-            
-                <li>
-                    <div class="seat occupied"></div>
-                    <small>Occupied</small>
-                </li>
-                </ul>
-            
-                <div class="seats-container">
-                    <div class="screen"></div>
-                    <div class="row">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
-                    <div class="row">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat occupied"></div>
-                        <div class="seat occupied"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
-            
-                    <div class="row">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat occupied"></div>
-                        <div class="seat occupied"></div>
-                    </div>
-            
-                    <div class="row">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
-            
-                    <div class="row">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat occupied"></div>
-                        <div class="seat occupied"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                    </div>
-            
-                    <div class="row">
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat"></div>
-                        <div class="seat occupied"></div>
-                        <div class="seat occupied"></div>
-                        <div class="seat occupied"></div>
-                        <div class="seat"></div>
-                    </div>
-                </div>
-            
-                <p class="text">
-                    You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span>
-                </p>
-            
-                <input id="add_to_basket_btn" type="button" value="Add to Basket"/>   
-            </form>
-            
-
-            <form class="form-hidden" id="basket">
-                <h1>User Basket</h1>
+                    <li>
+                        <div class="seat selected"></div>
+                        <small>Selected</small>
+                    </li>
                 
-                <!-- Basket table -->
-                <table id="basket-table">
-                    <thead>
-                    <tr>
-                        <th>Movie Name</th>
-                        <th>Ticket Price</th>
-                        <th>Ticket Quantity</th>
-                        <th>Total Price</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody id="basket-items">
+                    <li>
+                        <div class="seat occupied"></div>
+                        <small>Occupied</small>
+                    </li>
+                    </ul>
+                
+                    <div class="seats-container">
+                        <div class="screen"></div>
+                        <div class="row">
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                        </div>
+                        <div class="row">
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat occupied"></div>
+                            <div class="seat occupied"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                        </div>
+                
+                        <div class="row">
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat occupied"></div>
+                            <div class="seat occupied"></div>
+                        </div>
+                
+                        <div class="row">
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                        </div>
+                
+                        <div class="row">
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat occupied"></div>
+                            <div class="seat occupied"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                        </div>
+                
+                        <div class="row">
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat"></div>
+                            <div class="seat occupied"></div>
+                            <div class="seat occupied"></div>
+                            <div class="seat occupied"></div>
+                            <div class="seat"></div>
+                        </div>
+                    </div>
+                
+                    <p class="text">
+                        You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span>
+                    </p>
+                
+                    <input id="add_to_basket_btn" type="button" value="Add to Basket"/>   
+                </form>
+            </template>
+            
+            <template class="page" id="basket_t">
+                <form class="form-hidden" id="basket">
+                    <h1>User Basket</h1>
+                    
+                    <!-- Basket table -->
+                    <table id="basket-table">
+                        <thead>
                         <tr>
-                            <td>Avengers</td>
-                            <td>£10</td>
-                            <td>2</td>
-                            <td>£20</td>
-                            <td>
-                            <button class="edit-button">Edit</button>
-                            <button class="delete-button">Delete</button>
-
-                            </td>
+                            <th>Movie Name</th>
+                            <th>Ticket Price</th>
+                            <th>Ticket Quantity</th>
+                            <th>Total Price</th>
+                            <th>Actions</th>
                         </tr>
-                    <!-- Basket items will be dynamically added here -->
-                    </tbody>
-                </table>
-                
-                <!-- Add and delete buttons -->
-                <div style="text-align: center; margin-top: 20px;">
-                    <button id="show-add-form-button">Add a Movie Ticket</button>
-                    <button id="delete-all-button" style="margin-left: 20px;">Delete All</button>
-                </div>
-            </form>
+                        </thead>
+                        <tbody id="basket-items">
+                            <tr>
+                                <td>Avengers</td>
+                                <td>£10</td>
+                                <td>2</td>
+                                <td>£20</td>
+                                <td>
+                                <button class="edit-button">Edit</button>
+                                <button class="delete-button">Delete</button>
+    
+                                </td>
+                            </tr>
+                        <!-- Basket items will be dynamically added here -->
+                        </tbody>
+                    </table>
+                    
+                    <!-- Add and delete buttons -->
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button id="show-add-form-button">Add a Movie Ticket</button>
+                        <button id="delete-all-button" style="margin-left: 20px;">Delete All</button>
+                    </div>
+                </form>
+            </template>
+            
         </div>
 
         <script src="./home.js"></script>
