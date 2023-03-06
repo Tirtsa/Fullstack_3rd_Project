@@ -12,8 +12,19 @@ class Server{
             return obj;
         }
         else if(obj.method == 'POST' && obj.url =="http://localhost:3000/add_movie"){
-            //var new_movie = JSON.parse(body);
             add_to_basket(body);
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            return obj;
+        }
+        else if(obj.method == 'POST' && obj.url =="http://localhost:3000/add_seats"){
+            add_seats(body);
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            return obj;
+        }
+        else if(obj.method == 'POST' && obj.url =="http://localhost:3000/add_order"){
+            add_order(body);
             obj.status = 200;
             obj.ReadyState = ReadyState.DONE;
             return obj;
@@ -31,16 +42,39 @@ class Server{
             obj.response = get_users();
             return obj;
         }
-
         else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_movies"){
             obj.response = get_movies();
             return obj;
         }
         else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_current_movie"){
-            var movie = JSON.parse(body);
             obj.status = 200;
             obj.ReadyState = ReadyState.DONE;
             obj.response = get_current_movie();
+            return obj;
+        }
+        else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_selected_seats"){
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            obj.response = get_selected_seats();
+            return obj;
+        }
+        else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_selected_seats_by_movie_id"){
+            var movie_id = JSON.parse(body);
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            obj.response = get_selected_seats_by_movie_id(movie_id);
+            return obj;
+        }
+        else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_orders"){
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            obj.response = get_orders();
+            return obj;
+        }
+        else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_order_by_user_id"){
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            obj.response = get_order_by_user_id(user_id);
             return obj;
         }
         //PUT
