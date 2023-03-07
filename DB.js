@@ -1,11 +1,10 @@
 //define user class with name and movies array
 class User {
-    constructor(username,mail,password,time,trials,movies) {
+    constructor(username, mail, password, time, movies) {
         this.name = username;
         this.mail = mail;
         this.password = password;
         this.time = time;
-        this.trials = trials;
         this.movies = movies;
     }
 }
@@ -21,12 +20,21 @@ class Movie {
 }
 
 class Order {
-    constructor(user_id, movie_id, seats, total) {
+    constructor(order_id, user_id, elements, total_order) {
+        this.order_id = order_id;
         this.user_id = user_id;
-        this.movie_id = movie_id;
-        this.seats = seats;
-        this.total = total;
+        this.elements = elements;
+        this.total_order = total_order;
     }
+}
+
+class OrderElement {
+  constructor( movie_id, seats, total) {
+      this.user_id = user_id;
+      this.movie_id = movie_id;
+      this.seats = seats;
+      this.total = total;
+  }
 }
 
 class SelectedSeat {
@@ -68,11 +76,11 @@ function get_selected_seats(){
 }
 
 function get_current_user(){
-    return localStorage.getItem('CurrentUser');
+    return JSON.parse(localStorage.getItem('CurrentUser'));
 }
 
 function get_current_movie(){
-    return localStorage.getItem('CurrentMovie');
+    return JSON.parse(localStorage.getItem('CurrentMovie'));
 }
 
 //get order by user id
@@ -133,9 +141,9 @@ function add_seats(selected_seats_obj){
 function add_to_basket() {
     var movie = get_current_movie();
     var new_user = get_current_user();
+    var seats = get_seats_count();
     //var new_movie = JSON.parse(movie_json);
-    new_user.movies.push(movie);
-
+    new_user.movies.push(new OrderElement(movie.movieId, seats, (movie.price * seats)))
     //save the user object in local storage
     localStorage.setItem('user', JSON.stringify(new_user));
 }

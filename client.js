@@ -109,7 +109,7 @@ const app = {
 
 
       //create a new user object
-      let new_user = new User(uname,email,pwd,time,0, []);
+      let new_user = new User(uname,email,pwd,time, []);
 
       var fxhttp = new FXMLHttpRequest();
       fxhttp.open("POST", "http://localhost:3000/add_user", true);
@@ -126,6 +126,7 @@ const app = {
     container.appendChild(clon);
 
     set_movies();
+    set_genres();
 
     var fxhttp = new FXMLHttpRequest();
     fxhttp.open("GET", "http://localhost:3000/get_movies", true);
@@ -182,7 +183,32 @@ const app = {
         updateSelectedCount();
       }});
 
-  } 
+
+    document.querySelector("#add_to_basket_btn").addEventListener("click", app.basket);
+
+  } ,
+  basket: function() {
+    var container = document.getElementById("container");
+    actual_child = document.querySelector("#seats");
+    container.removeChild(actual_child);
+
+    var temp = document.getElementsByTagName("template")[4];
+    var clon = temp.content.cloneNode(true);
+    container.appendChild(clon);
+
+    //afficher détails current_movie
+    //afficher nb de places prises
+    //afficher total
+
+
+    /*valider panier :
+      orderselements = []
+      foreach orderleement in current_user.movies
+        orderselements.push(orderelement)
+        current_user.movies.remove(orderelement)
+      var order = new Order(order_id, orderselements, total_order)
+    */
+  }
 }
 
 document.addEventListener('DOMContentLoaded', app.init);
@@ -226,9 +252,13 @@ function updateSelectedCount() {
   fxhttp.send();
   var current_movie = fxhttp.response; 
   
-  var ticketPrice = +current_movie.price.value;
+  var ticketPrice = current_movie.price;
   const selectedSeatsCount = selectedSeats.length;
 
   count.innerText = selectedSeatsCount;
   total.innerText = selectedSeatsCount * ticketPrice;
+
+  fxhttp.open("PUT", "http://localhost:3000/update_seats_count", true);
+  fxhttp.send(selectedSeatsCount);
+  
 }
