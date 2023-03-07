@@ -208,6 +208,10 @@ const app = {
         current_user.movies.remove(orderelement)
       var order = new Order(order_id, orderselements, total_order)
     */
+
+
+      //get_seats_count
+      //add_order
   }
 }
 
