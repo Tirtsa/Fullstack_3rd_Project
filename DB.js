@@ -102,6 +102,10 @@ function get_selected_seats_by_movie_id(movie_id){
   }
 }
 
+function get_seats_count(){
+    return JSON.parse(localStorage.getItem('seats_count'));
+}
+
 function update_current_user(user){
     localStorage.setItem('CurrentUser', JSON.stringify(user));
 }
@@ -110,13 +114,17 @@ function update_current_movie(movie){
     localStorage.setItem('CurrentMovie', JSON.stringify(movie));
 }
 
+function update_seats_count(seats_count){
+    localStorage.setItem('seats_count', JSON.stringify(seats_count));
+}
+
 function delete_current_user(){
     localStorage.removeItem('CurrentUser');
 }
 
 function add_user(user){
     users.push(user);
-    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('CurrentUser', JSON.stringify(user));
     localStorage.setItem('users', JSON.stringify(users));
 }
 
@@ -145,7 +153,7 @@ function add_to_basket() {
     //var new_movie = JSON.parse(movie_json);
     new_user.movies.push(new OrderElement(movie.movieId, seats, (movie.price * seats)))
     //save the user object in local storage
-    localStorage.setItem('user', JSON.stringify(new_user));
+    localStorage.setItem('CurrentUser', JSON.stringify(new_user));
 }
 
 function add_order(order){
@@ -163,7 +171,7 @@ function delete_movie(movie_json, user_json) {
     }
 
     //remove the movie from the user from local storage
-    localStorage.setItem('user', JSON.stringify(new_user));
+    localStorage.setItem('CurrentUser', JSON.stringify(new_user));
 }
 
 function set_movies() {

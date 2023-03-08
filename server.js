@@ -77,6 +77,12 @@ class Server{
             obj.response = get_order_by_user_id(user_id);
             return obj;
         }
+        else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_seats_count"){
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            obj.response = get_seats_count();
+            return obj;
+        }
         //PUT
         else if(obj.method == 'PUT' && obj.url =="http://localhost:3000/update_current_user"){
             update_current_user(body);
@@ -86,6 +92,12 @@ class Server{
         }
         else if(obj.method == 'PUT' && obj.url =="http://localhost:3000/update_current_movie"){
             update_current_movie(body);
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            return obj;
+        }
+        else if(obj.method == 'PUT' && obj.url =="http://localhost:3000/update_seats_count"){
+            update_seats_count(body);
             obj.status = 200;
             obj.ReadyState = ReadyState.DONE;
             return obj;

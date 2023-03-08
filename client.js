@@ -183,7 +183,13 @@ const app = {
         updateSelectedCount();
       }});
 
+      //get the current movie to update the title
+      var fxhttp = new FXMLHttpRequest();
+      fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
+      fxhttp.send();
+      var current_movie = fxhttp.response;
 
+      movie_title.innerText = "Movie : " + current_movie.title;
     document.querySelector("#add_to_basket_btn").addEventListener("click", app.basket);
 
   } ,
@@ -199,6 +205,42 @@ const app = {
     //afficher détails current_movie
     //afficher nb de places prises
     //afficher total
+
+    //get the current movie to update the title
+    var fxhttp = new FXMLHttpRequest();
+    fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
+    fxhttp.send();
+    var current_movie = fxhttp.response;
+
+    var tbodyRef = document.getElementById('basket-table').getElementsByTagName('tbody')[0];
+
+    //insert a row in the table at the last row
+    var newRow = tbodyRef.insertRow();
+    //insert the movie title, price, quantity and total
+    var newCell = newRow.insertCell();
+    var newText = document.createTextNode(current_movie.title);
+    newCell.appendChild(newText);
+    
+    //insert the movie price
+    newCell = newRow.insertCell();
+    newText = document.createTextNode(current_movie.price);
+    newCell.appendChild(newText);
+
+    //get the seats count
+    var fxhttp = new FXMLHttpRequest();
+    fxhttp.open("GET", "http://localhost:3000/get_seats_count", true);
+    fxhttp.send();
+    var seats_count = fxhttp.response;
+
+    //insert the movie quantity
+    newCell = newRow.insertCell();
+    newText = document.createTextNode(seats_count);
+    newCell.appendChild(newText);
+
+    //insert the movie total
+    newCell = newRow.insertCell();
+    newText = document.createTextNode(current_movie.price * seats_count);
+    newCell.appendChild(newText);
 
 
     /*valider panier :
