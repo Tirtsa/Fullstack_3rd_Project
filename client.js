@@ -242,6 +242,17 @@ const app = {
     newText = document.createTextNode(current_movie.price * seats_count);
     newCell.appendChild(newText);
 
+    //insert cell for the delete button and edit button
+    newCell = newRow.insertCell();
+    let btnEdit = document.createElement("button");
+    btnEdit.innerHTML = "Edit";
+    newCell.appendChild(btnEdit);
+
+    let btnDelete = document.createElement("button");
+    btnDelete.innerHTML = "Delete";
+    newCell.appendChild(btnDelete);
+
+
 
     /*valider panier :
       orderselements = []
