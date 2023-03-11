@@ -20,7 +20,7 @@ class FXMLHttpRequest{
     open(method, url,async){
         this.method = method;
         this.url = url;
-        this.readyState = ReadyState.OPENED;
+        this.ReadyState = ReadyState.OPENED;
 
         this.async= async;
         if (this.async == true){
@@ -48,9 +48,10 @@ class FXMLHttpRequest{
     send(body){ //body - ce qu'on envoie au server
         var fxhttp = null;
         var fxhttp = Network.send(body, this);
-        this.ReadyState = fxhttp.ReadyState;
-        this.status = fxhttp.status;
-        this.response = fxhttp.response;
+        return fxhttp;
+        //this.ReadyState = fxhttp.ReadyState;
+        //this.status = fxhttp.status;
+        //this.response = fxhttp.response;
     }
 
 

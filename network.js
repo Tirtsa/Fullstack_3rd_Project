@@ -3,7 +3,7 @@ class Network{
         obj.ReadyState = ReadyState.HEADERS_RECEIVED;
         var fxhttp = null;
         fxhttp = Server.carry_request(body, obj);
-        //return fxhttp.onload();
-        return fxhttp;
+        return fxhttp.onload();
+        //return fxhttp;
     }
 }

@@ -44,9 +44,9 @@ const app = {
       // first request - get users list
       var fxhttp = new FXMLHttpRequest();
       fxhttp.open("GET", "http://localhost:3000/get_users", true);
-      fxhttp.send();
-      var users_list = fxhttp.response;
-      //var users_list = fxhttp.onload();
+      var users_list = fxhttp.send();
+      //var users_list = fxhttp.response;
+      //var users_list = fxhttp;
 
       //check if the uname of the user is in the users_list
       //let obj = arr.find(o => o.name === 'string 1');
@@ -130,8 +130,8 @@ const app = {
 
     var fxhttp = new FXMLHttpRequest();
     fxhttp.open("GET", "http://localhost:3000/get_movies", true);
-    fxhttp.send();
-    var movies_list = fxhttp.response;
+    var movies_list = fxhttp.send();
+    //var movies_list = fxhttp.response;
 
     document.querySelector("#category").addEventListener("change", e => {
       e.preventDefault();
@@ -186,8 +186,8 @@ const app = {
       //get the current movie to update the title
       var fxhttp = new FXMLHttpRequest();
       fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
-      fxhttp.send();
-      var current_movie = fxhttp.response;
+      var current_movie = fxhttp.send();
+      //var current_movie = fxhttp.response;
 
       movie_title.innerText = "Movie : " + current_movie.title;
     document.querySelector("#add_to_basket_btn").addEventListener("click", app.basket);
@@ -209,8 +209,8 @@ const app = {
     //get the current movie to update the title
     var fxhttp = new FXMLHttpRequest();
     fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
-    fxhttp.send();
-    var current_movie = fxhttp.response;
+    var current_movie = fxhttp.send();
+    //var current_movie = fxhttp.response;
 
     var tbodyRef = document.getElementById('basket-table').getElementsByTagName('tbody')[0];
 
@@ -229,8 +229,8 @@ const app = {
     //get the seats count
     var fxhttp = new FXMLHttpRequest();
     fxhttp.open("GET", "http://localhost:3000/get_seats_count", true);
-    fxhttp.send();
-    var seats_count = fxhttp.response;
+    var seats_count = fxhttp.send();
+    //var seats_count = fxhttp.response;
 
     //insert the movie quantity
     newCell = newRow.insertCell();
@@ -295,8 +295,8 @@ function updateSelectedCount() {
 
   var fxhttp = new FXMLHttpRequest();
   fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
-  fxhttp.send();
-  var current_movie = fxhttp.response; 
+  var current_movie = fxhttp.send();
+  //var current_movie = fxhttp.response; 
   
   var ticketPrice = current_movie.price;
   const selectedSeatsCount = selectedSeats.length;

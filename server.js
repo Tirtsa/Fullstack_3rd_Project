@@ -39,10 +39,14 @@ class Server{
         }
 
         else if (obj.method == 'GET' && obj.url =="http://localhost:3000/get_users"){
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
             obj.response = get_users();
             return obj;
         }
         else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_movies"){
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
             obj.response = get_movies();
             return obj;
         }
