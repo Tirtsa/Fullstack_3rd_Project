@@ -29,9 +29,9 @@ class Order {
 }
 
 class OrderElement {
-  constructor( movie_id, seats, total) {
-      this.user_id = user_id;
-      this.movie_id = movie_id;
+  constructor(movie_name, movie_price, seats, total) {
+      this.movie_name = movie_name;
+      this.movie_price = movie_price;
       this.seats = seats;
       this.total = total;
   }
@@ -151,7 +151,7 @@ function add_to_basket() {
     var new_user = get_current_user();
     var seats = get_seats_count();
     //var new_movie = JSON.parse(movie_json);
-    new_user.movies.push(new OrderElement(movie.movieId, seats, (movie.price * seats)))
+    new_user.movies.push(new OrderElement(movie.title, movie.price, seats, (movie.price * seats)))
     //save the user object in local storage
     localStorage.setItem('CurrentUser', JSON.stringify(new_user));
 }

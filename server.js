@@ -106,6 +106,12 @@ class Server{
             obj.ReadyState = ReadyState.DONE;
             return obj;
         }
+        else if(obj.method == 'PUT' && obj.url =="http://localhost:3000/add_to_basket"){
+            add_to_basket();
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            return obj;
+        }
 
         //DELETE
         else if(obj.method == 'DELETE' && obj.url =="http://localhost:3000/delete_current_user"){
@@ -120,6 +126,13 @@ class Server{
             obj.ReadyState = ReadyState.DONE;
             return obj;
         }
+        else if(obj.method == 'DELETE' && obj.url =="http://localhost:3000/delete_from_basket"){
+            delete_from_basket(body);
+            obj.status = 200;
+            obj.ReadyState = ReadyState.DONE;
+            return obj;
+        }
+        
 
     }
     

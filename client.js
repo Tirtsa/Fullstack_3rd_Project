@@ -181,15 +181,18 @@ const app = {
       if (e.target.classList.contains('seat') && !e.target.classList.contains('occupied')) {
         e.target.classList.toggle('selected');
         updateSelectedCount();
-      }});
+      }
+    });
 
-      //get the current movie to update the title
-      var fxhttp = new FXMLHttpRequest();
-      fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
-      var current_movie = fxhttp.send();
-      //var current_movie = fxhttp.response;
+    //get the current movie to update the title
+    var fxhttp = new FXMLHttpRequest();
+    fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
+    var current_movie = fxhttp.send();
+    //var current_movie = fxhttp.response;
 
-      movie_title.innerText = "Movie : " + current_movie.title;
+    movie_title.innerText = "Movie : " + current_movie.title;
+    
+    add_to_basket();
     document.querySelector("#add_to_basket_btn").addEventListener("click", app.basket);
 
   } ,
@@ -208,49 +211,56 @@ const app = {
 
     //get the current movie to update the title
     var fxhttp = new FXMLHttpRequest();
-    fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
-    var current_movie = fxhttp.send();
+    fxhttp.open("GET", "http://localhost:3000/get_current_user", true);
+    var current_user = fxhttp.send();
     //var current_movie = fxhttp.response;
 
-    var tbodyRef = document.getElementById('basket-table').getElementsByTagName('tbody')[0];
+    var all_basket_elements = current_user.movies;
 
-    //insert a row in the table at the last row
-    var newRow = tbodyRef.insertRow();
-    //insert the movie title, price, quantity and total
-    var newCell = newRow.insertCell();
-    var newText = document.createTextNode(current_movie.title);
-    newCell.appendChild(newText);
     
-    //insert the movie price
-    newCell = newRow.insertCell();
-    newText = document.createTextNode(current_movie.price);
-    newCell.appendChild(newText);
+    all_basket_elements.forEach(bask_elem => {
+      var tbodyRef = document.getElementById('basket-table').getElementsByTagName('tbody')[0];
 
-    //get the seats count
-    var fxhttp = new FXMLHttpRequest();
-    fxhttp.open("GET", "http://localhost:3000/get_seats_count", true);
-    var seats_count = fxhttp.send();
-    //var seats_count = fxhttp.response;
+      //insert a row in the table at the last row
+      var newRow = tbodyRef.insertRow();
+      //insert the movie title, price, quantity and total
+      var newCell = newRow.insertCell();
+      var newText = document.createTextNode(bask_elem.movie_name);
+      newCell.appendChild(newText);
+      
+      //insert the movie price
+      newCell = newRow.insertCell();
+      newText = document.createTextNode(bask_elem.movie_price);
+      newCell.appendChild(newText);
 
-    //insert the movie quantity
-    newCell = newRow.insertCell();
-    newText = document.createTextNode(seats_count);
-    newCell.appendChild(newText);
+      //insert the movie quantity
+      newCell = newRow.insertCell();
+      newText = document.createTextNode(bask_elem.seats);
+      newCell.appendChild(newText);
 
-    //insert the movie total
-    newCell = newRow.insertCell();
-    newText = document.createTextNode(current_movie.price * seats_count);
-    newCell.appendChild(newText);
+      //insert the movie total
+      newCell = newRow.insertCell();
+      newText = document.createTextNode(bask_elem.total);
+      newCell.appendChild(newText);
 
-    //insert cell for the delete button and edit button
-    newCell = newRow.insertCell();
-    let btnEdit = document.createElement("button");
-    btnEdit.innerHTML = "Edit";
-    newCell.appendChild(btnEdit);
+      //insert cell for the delete button and edit button
+      newCell = newRow.insertCell();
+      let btnEdit = document.createElement("button");
+      btnEdit.innerHTML = "Edit";
+      newCell.appendChild(btnEdit);
 
-    let btnDelete = document.createElement("button");
-    btnDelete.innerHTML = "Delete";
-    newCell.appendChild(btnDelete);
+      let btnDelete = document.createElement("button");
+      btnDelete.innerHTML = "Delete";
+      newCell.appendChild(btnDelete);
+
+      btnEdit.addEventListener("click", e => {
+        app.seats();
+        deleteFromBasket(bask_elem);
+      })
+
+    });
+
+    
 
 
 
@@ -318,4 +328,16 @@ function updateSelectedCount() {
   fxhttp.open("PUT", "http://localhost:3000/update_seats_count", true);
   fxhttp.send(selectedSeatsCount);
   
+}
+
+function add_to_basket() {
+  var fxhttp = new FXMLHttpRequest();
+  fxhttp.open("PUT", "http://localhost:3000/add_to_basket", true);
+  fxhttp.send();
+}
+
+function deleteFromBasket(bask_elem) {
+  var fxhttp = new FXMLHttpRequest();
+  fxhttp.open("DELETE", "http://localhost:3000/delete_from_basket", true);
+  fxhttp.send(bask_elem);
 }
