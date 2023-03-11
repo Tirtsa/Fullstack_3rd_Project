@@ -159,16 +159,16 @@ const app = {
       let movie = movies_list.find(m => m.movieId == parseInt(selected_movie));
 
       var fxhttp = new FXMLHttpRequest();
-        fxhttp.open("PUT", "http://localhost:3000/update_current_movie", true);
-        fxhttp.send(movie);
+      fxhttp.open("PUT", "http://localhost:3000/update_current_movie", true);
+      fxhttp.send(movie);
 
-        app.seats();
+      app.seats("#booking");
     });
 
   },
-  seats: function() {
+  seats: function(id) {
     var container = document.getElementById("container");
-    actual_child = document.querySelector("#booking");
+    actual_child = document.querySelector(id);
     container.removeChild(actual_child);
 
     var temp = document.getElementsByTagName("template")[3];
@@ -254,9 +254,21 @@ const app = {
       newCell.appendChild(btnDelete);
 
       btnEdit.addEventListener("click", e => {
-        app.seats();
         deleteFromBasket(bask_elem);
-      })
+
+        //get all the movies
+        var fxhttp = new FXMLHttpRequest();
+        fxhttp.open("GET", "http://localhost:3000/get_movies", true);
+        var movies_list = fxhttp.send();
+        let curr_movie = movies_list.find(o => o.title === bask_elem.movie_name);
+
+        //update the current movie
+        var fxhttp = new FXMLHttpRequest();
+        fxhttp.open("PUT", "http://localhost:3000/update_current_movie", true);
+        fxhttp.send(curr_movie);
+
+        app.seats("#basket");
+      });
 
     });
 

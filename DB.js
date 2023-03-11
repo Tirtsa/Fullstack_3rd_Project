@@ -174,6 +174,22 @@ function delete_movie(movie_json, user_json) {
     localStorage.setItem('CurrentUser', JSON.stringify(new_user));
 }
 
+function delete_from_basket(basket_elem){
+    var curr_user = get_current_user();
+    var type = basket_elem.typeOf();
+    var name = basket_elem['movie_name'];
+    curr_user.movies.forEach(element => {
+      console.log(element.movie_name);
+    });
+    console.log(name);
+    var index = curr_user.movies.findIndex(item => item.movie_name === basket_elem.movie_name);
+    if (index > -1) {
+      curr_user.movies.splice(index, 1);
+    }
+    //save the user object in local storage
+    localStorage.setItem('CurrentUser', JSON.stringify(curr_user));
+}
+
 function set_movies() {
   movies_json.forEach(element => {
     movies.push(new Movie(element["movieId"], element["title"], element["genres"], element["price"]));

@@ -5,7 +5,6 @@ class Server{
     static carry_request(body, obj){
         //POST
         if(obj.method == 'POST' && obj.url =="http://localhost:3000/add_user"){
-            //var new_user = JSON.parse(body);
             add_user(body);
             obj.status = 200;
             obj.ReadyState = ReadyState.DONE;
@@ -30,8 +29,7 @@ class Server{
             return obj;
         }
         //GET
-        else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_user"){
-            var objet = JSON.parse(body);
+        else if(obj.method == 'GET' && obj.url =="http://localhost:3000/get_current_user"){
             obj.status = 200;
             obj.ReadyState = ReadyState.DONE;
             obj.response = get_current_user();
