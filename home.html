@@ -98,8 +98,12 @@
 
             <template class="page" id="seats_t">
                 <form class="form" id="seats">
+                    <div>
                         <h1 id="movie_title"></h1>
-                        <h2>Choose your seats</h1>
+                        <p id="genres"></p>
+                    </div>
+                        
+                    <h2>Choose your seats</h1>
                     <ul class="showcase">
                         <li>
                             <div class="seat"></div>
@@ -189,7 +193,7 @@
                         You have selected <span id="count">0</span> seats for a price of $<span id="total">0</span>
                     </p>
                 
-                    <input id="add_to_basket_btn" type="button" value="Add to Basket"/>   
+                    <input id="add_to_basket_btn" class="button" type="button" value="Add to Basket"/>   
                 </form>
             </template>
             
@@ -215,8 +219,8 @@
                     
                     <!-- Add and delete buttons -->
                     <div style="text-align: center; margin-top: 20px;">
-                        <button id="add_a_movie">Add a Movie Ticket</button>
-                        <button id="delete-all-button" style="margin-left: 20px;">Delete All</button>
+                        <button id="add_a_movie" class="button bskt_btn">Add a Movie Ticket</button>
+                        <button id="delete-all-button" class="button bskt_btn">Delete All</button>
                     </div>
                 </form>
             </template>

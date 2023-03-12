@@ -202,25 +202,24 @@ const app = {
     //var current_movie = fxhttp.response;
 
     movie_title.innerText = "Movie : " + current_movie.title;
-    
+    genres.innerText = "Genres : " + current_movie.genres;
+    document.querySelector("#genres").innerText = "Genres : " + current_movie.genres;
     
     document.querySelector("#add_to_basket_btn").addEventListener("click", e => {
       add_to_basket(); 
-      app.basket ();
+      app.basket ("#seats");
     });
 
   } ,
-  basket: function() {
+  basket: function(id) {
     //check if the actual child is the basket
     var container = document.getElementById("container");
-    if (!container.contains(document.querySelector("#basket"))){
-      actual_child = document.querySelector("#seats");
-      container.removeChild(actual_child);
-  
-      var temp = document.getElementsByTagName("template")[4];
-      var clon = temp.content.cloneNode(true);
-      container.appendChild(clon);
-    }
+    actual_child = document.querySelector(id);
+    container.removeChild(actual_child);
+
+    var temp = document.getElementsByTagName("template")[4];
+    var clon = temp.content.cloneNode(true);
+    container.appendChild(clon);
 
     //get the current movie to update the title
     var fxhttp = new FXMLHttpRequest();
@@ -294,7 +293,7 @@ const app = {
 
       btnDelete.addEventListener("click", e => {
         deleteFromBasket(bask_elem);
-        app.basket();
+        app.basket("#basket");
         
       });
 

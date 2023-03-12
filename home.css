@@ -155,6 +155,10 @@ body {
     transform: scale(0.98);
 }
 
+.bskt_btn {
+    width: 45%;
+}
+
 .text {
     text-align: center;
 }
