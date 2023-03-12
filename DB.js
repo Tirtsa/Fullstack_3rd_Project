@@ -118,6 +118,10 @@ function update_seats_count(seats_count){
     localStorage.setItem('seats_count', JSON.stringify(seats_count));
 }
 
+function update_selected_seats(seatsIndex){
+  localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
+}
+
 function delete_current_user(){
     localStorage.removeItem('CurrentUser');
 }

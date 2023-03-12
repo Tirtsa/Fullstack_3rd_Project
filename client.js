@@ -117,13 +117,24 @@ const app = {
     });
   },
   booking: function() {
+    
     var container = document.getElementById("container");
-    actual_child = document.querySelector("#login");
-    container.removeChild(actual_child);
+    if (container.contains(document.querySelector("#basket"))){
+      container.removeChild(document.querySelector("#basket"));
+      var temp = document.getElementsByTagName("template")[2];
+      var clon = temp.content.cloneNode(true);
+      container.appendChild(clon);
+    }
+    else {
+      actual_child = document.querySelector("#login");
+      container.removeChild(actual_child);
 
-    var temp = document.getElementsByTagName("template")[2];
-    var clon = temp.content.cloneNode(true);
-    container.appendChild(clon);
+      var temp = document.getElementsByTagName("template")[2];
+      var clon = temp.content.cloneNode(true);
+      container.appendChild(clon);
+
+    }
+    
 
     set_movies();
     set_genres();
@@ -200,17 +211,16 @@ const app = {
 
   } ,
   basket: function() {
+    //check if the actual child is the basket
     var container = document.getElementById("container");
-    actual_child = document.querySelector("#seats");
-    container.removeChild(actual_child);
-
-    var temp = document.getElementsByTagName("template")[4];
-    var clon = temp.content.cloneNode(true);
-    container.appendChild(clon);
-
-    //afficher détails current_movie
-    //afficher nb de places prises
-    //afficher total
+    if (!container.contains(document.querySelector("#basket"))){
+      actual_child = document.querySelector("#seats");
+      container.removeChild(actual_child);
+  
+      var temp = document.getElementsByTagName("template")[4];
+      var clon = temp.content.cloneNode(true);
+      container.appendChild(clon);
+    }
 
     //get the current movie to update the title
     var fxhttp = new FXMLHttpRequest();
@@ -219,6 +229,15 @@ const app = {
     //var current_movie = fxhttp.response;
 
     var all_basket_elements = current_user.movies;
+
+    if (all_basket_elements.length == 0) {
+      //delete the table and display a message
+      var table = document.getElementById("basket-table");
+      table.parentNode.removeChild(table);
+      var message = document.createElement("p");
+      message.innerHTML = "Your basket is empty";
+      document.getElementById("basket").appendChild(message);
+    }
 
     
     all_basket_elements.forEach(bask_elem => {
@@ -273,6 +292,17 @@ const app = {
         app.seats("#basket");
       });
 
+      btnDelete.addEventListener("click", e => {
+        deleteFromBasket(bask_elem);
+        app.basket();
+        
+      });
+
+      // do an event listener to the add a movie button
+      document.querySelector("#add_a_movie").addEventListener("click", e => {
+        app.booking();
+      }
+      );
     });
 
     
@@ -291,6 +321,11 @@ const app = {
       //get_seats_count
       //add_order
   }
+
+
+
+
+
 }
 
 document.addEventListener('DOMContentLoaded', app.init);
@@ -322,9 +357,10 @@ function updateSelectedCount() {
   // Copy selected seats index into arr
   const seatsIndex = [...selectedSeats].map((seat) => [...seats].indexOf(seat));
 
-  //storing the seleted seats in local storage
-  localStorage.setItem('selectedSeats', JSON.stringify(seatsIndex));
-
+  var fxhttp = new FXMLHttpRequest();
+  fxhttp.open("PUT", "http://localhost:3000/update_selected_seats", true);
+  fxhttp.send(seatsIndex);
+   
   //copy selected seats into arr
   // map through array
   //return new array of indexes
@@ -332,7 +368,6 @@ function updateSelectedCount() {
   var fxhttp = new FXMLHttpRequest();
   fxhttp.open("GET", "http://localhost:3000/get_current_movie", true);
   var current_movie = fxhttp.send();
-  //var current_movie = fxhttp.response; 
   
   var ticketPrice = current_movie.price;
   const selectedSeatsCount = selectedSeats.length;

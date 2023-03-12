@@ -49,9 +49,6 @@ class FXMLHttpRequest{
         var fxhttp = null;
         var fxhttp = Network.send(body, this);
         return fxhttp;
-        //this.ReadyState = fxhttp.ReadyState;
-        //this.status = fxhttp.status;
-        //this.response = fxhttp.response;
     }
 
 
