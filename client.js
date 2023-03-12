@@ -192,8 +192,11 @@ const app = {
 
     movie_title.innerText = "Movie : " + current_movie.title;
     
-    add_to_basket();
-    document.querySelector("#add_to_basket_btn").addEventListener("click", app.basket);
+    
+    document.querySelector("#add_to_basket_btn").addEventListener("click", e => {
+      add_to_basket(); 
+      app.basket ();
+    });
 
   } ,
   basket: function() {

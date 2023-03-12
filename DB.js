@@ -182,7 +182,8 @@ function delete_from_basket(basket_elem){
       curr_user.movies.splice(index, 1);
     }
     //save the user object in local storage
-    localStorage.setItem('CurrentUser', JSON.stringify(curr_user));
+    update_current_user(curr_user);
+    var test =  get_current_user();
 }
 
 function set_movies() {
